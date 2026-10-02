@@ -23,3 +23,31 @@ while number <= 10:
     number = number + 1
 
 print("Loop finished!")
+
+
+
+
+number = 0
+
+while number < 5:
+    number = number + 1
+
+    if number == 3:
+        continue
+
+    print(number)
+
+
+
+number = 0
+
+while number < 5:
+    number = number + 1
+
+    if number == 2:
+        continue
+
+    if number == 4:
+        break
+
+    print(number)
