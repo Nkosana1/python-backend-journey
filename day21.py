@@ -1,6 +1,7 @@
 new_car = input("Enter a new car:")
 
 with open("car.txt", "a") as file:
+    file.write(new_car + "\n")
 
 print(new_car, "saved successfully!")
 
