@@ -1,0 +1,49 @@
+import json
+
+def save_inventory(cars):
+    with open("inventory_day30.json", "w") as file:
+        json.dump(cars, file, indent=4)
+
+def load_inventory():
+    try:
+        with open("inventory_day30.json", "r") as file:
+            return json.load(file)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+cars = load_inventory()
+
+
+
+
+def show_menu():
+    print("\n=== CAR INVENTORY SYSTEM ===")
+    print("1. View cars")
+    print("2. Add car")
+    print("3. Search car")
+    print("4. Exit")
+
+while True:
+    show_menu()
+
+    choice = input("Choose an option (1-4):")
+
+    if choice == "1":
+        for car in cars:
+            print(car["brand"], car["model"])
+    elif choice == "2":
+        brand = input("Enter car brand:")
+        model = input("Enter car model:")
+
+        new_car = {"brand": brand, "model": model}
+        cars.append(new_car)
+        save_inventory(cars)
+
+        print("Car added successfully!")
+    elif choice == "3":
+        print("You selected Search car")
+    elif choice == "4":
+        print("Goodbye!")
+        break
+    else:
+        print("Invalid option!")
