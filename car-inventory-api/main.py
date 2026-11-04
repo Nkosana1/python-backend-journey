@@ -1,5 +1,11 @@
+from pydantic import BaseModel
+
 import json
 from fastapi import FastAPI
+
+class Car(BaseModel):
+    brand: str
+    model: str
 
 app = FastAPI()
 
@@ -16,6 +22,13 @@ def home():
 def get_cars():
     return load_cars()
 
+@app.post("/cars")
+def add_car(car:Car):
+    return {
+        "message": "Car received successfully!",
+        "car": car   
+
+    }
 
 
 
