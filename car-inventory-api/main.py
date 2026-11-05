@@ -23,7 +23,13 @@ def get_cars():
     return load_cars()
 
 @app.post("/cars")
-def add_car(car:Car):
+def add_car(car: Car):
+    cars = load_cars()
+    cars.append(car.model_dump())
+
+    with open("cars.json", "w") as file:
+        json.dump(cars, file, indent=4)
+
     return {
         "message": "Car received successfully!",
         "car": car   
