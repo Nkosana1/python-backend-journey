@@ -22,7 +22,7 @@ def home():
 def get_cars():
     return load_cars()
 
-@app.post("/cars")
+@app.post("/cars", status_code=201)
 def add_car(car: Car):
     cars = load_cars()
     cars.append(car.model_dump())
@@ -31,7 +31,7 @@ def add_car(car: Car):
         json.dump(cars, file, indent=4)
 
     return {
-        "message": "Car received successfully!",
+        "message": "Car saved successfully!",
         "car": car   
 
     }
