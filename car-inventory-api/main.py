@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 import json
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 class Car(BaseModel):
     brand: str
@@ -25,6 +25,20 @@ def get_cars():
 @app.post("/cars", status_code=201)
 def add_car(car: Car):
     cars = load_cars()
+
+    for existing_car in cars:
+        if (
+ 
+            existing_car["brand"].lower() == car.brand.lower()
+            and existing_car["model"].lower() == car.model.lower()
+
+        ):
+
+            raise HTTPException(
+                status_code=409,
+                detail="This car already exists!"
+
+            )
     cars.append(car.model_dump())
 
     with open("cars.json", "w") as file:
