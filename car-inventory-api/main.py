@@ -29,8 +29,8 @@ def add_car(car: Car):
     for existing_car in cars:
         if (
  
-            existing_car["brand"].lower() == car.brand.lower()
-            and existing_car["model"].lower() == car.model.lower()
+            existing_car["brand"].strip().lower() == car.brand.strip().lower()
+            and existing_car["model"].strip().lower() == car.model.strip().lower()
 
         ):
 
