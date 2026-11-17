@@ -51,7 +51,28 @@ def add_car(car: Car):
     }
 
 
+@app.delete("/cars/{brand}/{model}")
+def delete_car(brand:str,model:str):
+    cars = load_cars()
 
+    for car in cars:
+        if (
+            car["brand"].strip().lower() == brand.strip().lower()
+            and car["model"].strip().lower() == model.strip().lower()
+        ):
+            cars.remove(car)
+
+            with open("cars.json", "w") as file:
+                json.dump(cars, file, indent=4)
+
+            return {"message": "Car deleted successfully!"}
+
+
+    raise HTTPException(
+        status_code=404,
+        detail="Car not found!"
+
+    )
 
 
 
