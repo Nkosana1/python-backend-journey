@@ -51,7 +51,7 @@ def add_car(car: Car):
     }
 
 
-@app.delete("/cars/{brand}/{model}")
+@app.delete("/cars/{brand}/{model}", status_code=200)
 def delete_car(brand:str,model:str):
     cars = load_cars()
 
