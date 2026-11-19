@@ -74,6 +74,13 @@ def delete_car(brand:str,model:str):
 
     )
 
+@app.get("/health")
+def health_check():
+    return {
+    
+        "status": "healthy",
+        "service": "Car Inventory API"
 
+    }
 
 
