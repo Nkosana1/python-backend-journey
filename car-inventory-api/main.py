@@ -83,4 +83,28 @@ def health_check():
 
     }
 
+@app.put("/cars/{brand}/{model}")
+def update_car(brand: str, model: str, updated_car: Car):
+    cars = load_cars()
 
+    for index, car in enumerate(cars):
+        if (
+            car["brand"].lower() == brand.lower()
+            and car["model"].lower() == model.lower()
+        ):
+            cars[index] = updated_car.model_dump()
+
+            with open("cars.json", "w") as file:
+                json.dump(cars, file, indent=4)
+
+            return {
+                "message": "Car updated successfully!",
+                "car": updated_car
+
+            }
+
+    raise HTTPException(
+        status_code=404,
+        detail="Car not found!"
+
+    )
