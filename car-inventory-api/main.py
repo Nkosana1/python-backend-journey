@@ -108,3 +108,22 @@ def update_car(brand: str, model: str, updated_car: Car):
         detail="Car not found!"
 
     )
+
+
+@app.get("/cars/{brand}/{model}")
+def get_car(brand: str, model: str):
+    cars = load_cars()
+
+    for car in cars:
+        if (
+            car["brand"].lower() == brand.lower()
+            and car["model"].lower() == model.lower()
+
+        ):
+            return car
+
+    raise HTTPException(
+        status_code=404,
+        detail="Car not found!"
+
+    )
