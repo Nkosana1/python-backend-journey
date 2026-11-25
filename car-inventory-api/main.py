@@ -92,6 +92,20 @@ def update_car(brand: str, model: str, updated_car: Car):
             car["brand"].lower() == brand.lower()
             and car["model"].lower() == model.lower()
         ):
+            for other_index, existing_car in enumerate(cars) :
+                if (
+                    other_index != index
+                    and existing_car["brand"].lower() == updated_car.brand.lower()
+                    and existing_car["model"].lower() == updated_car.model.lower()
+
+                ):
+
+
+                    raise HTTPException(
+                        status_code=409,
+                        detail="This car already exists!"
+                    ) 
+
             cars[index] = updated_car.model_dump()
 
             with open("cars.json", "w") as file:
