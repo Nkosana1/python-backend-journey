@@ -16,3 +16,22 @@ def test_get_cars():
 def test_car_not_found():
     response = client.get("/cars/Unknown/Unknown")
     assert response.status_code == 404
+
+def test_add_car(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+
+    inventory = tmp_path / "cars.json"
+    inventory.write_text("[]")
+
+    response = client.post(
+
+        "/cars",
+        json={
+            "brand": "Bugatti",
+            "model": "Chiron"
+
+        }
+
+
+    )
+    assert response.status_code in (200, 201)
